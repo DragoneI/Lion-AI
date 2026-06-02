@@ -1,0 +1,20 @@
+{
+  "name": "Lion AI – Assistant IA",
+  "short_name": "Lion AI",
+  "description": "Votre assistant IA intelligent avec RAG, vision et recherche web",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#EF4444",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "fr"
+}
