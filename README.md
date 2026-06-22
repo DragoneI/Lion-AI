@@ -2,7 +2,7 @@
   <img src="banner.png" alt="Lion AI Logo" width="100%"/>
 </p>
 
-# 🦁 Lion AI – Intelligent AI Assistant
+# Lion AI – Intelligent AI Assistant
 
 **Lion AI** is a feature-rich Progressive Web App (PWA) AI assistant with **RAG** (personal documents), **image vision**, **voice input (STT)**, **web search**, and **long-term memory** with conversation summarization.
 
