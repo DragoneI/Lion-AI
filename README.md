@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.svg" alt="Lion AI Logo" width="100%"/>
+  <img src="banner.png" alt="Lion AI Logo" width="100%"/>
 </p>
 
 # 🦁 Lion AI – Intelligent AI Assistant
