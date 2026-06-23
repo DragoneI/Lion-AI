@@ -9,13 +9,13 @@
   "theme_color": "#EF4444",
  "icons": [
   {
-    "src": "logo-app.svg",
+    "src": "logo-app.svg?v=2",
     "sizes": "192x192",
     "type": "image/svg+xml",
     "purpose": "any"
   },
   {
-    "src": "logo-app.svg",
+    "src": "logo-app.svg?v=2",
     "sizes": "512x512",
     "type": "image/svg+xml",
     "purpose": "any"
