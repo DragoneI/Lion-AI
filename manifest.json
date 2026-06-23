@@ -1,26 +1,32 @@
 {
-  "name": "Lion AI – Assistant IA",
+  "name": "Lion AI – AI Assistant",
   "short_name": "Lion AI",
-  "description": "Votre assistant IA intelligent avec RAG, vision et recherche web",
-  "start_url": "/index.html",
+  "description": "Your intelligent AI assistant with RAG, vision, and web search",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#EF4444",
- "icons": [
-  {
-    "src": "logo-app.svg?v=2",
-    "sizes": "192x192",
-    "type": "image/svg+xml",
-    "purpose": "any"
-  },
-  {
-    "src": "logo-app.svg?v=2",
-    "sizes": "512x512",
-    "type": "image/svg+xml",
-    "purpose": "any"
-  }
-],
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo-app.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
   "categories": ["productivity", "utilities"],
-  "lang": "fr"
+  "lang": "en"
 }
