@@ -21,7 +21,7 @@
       "purpose": "any maskable"
     },
     {
-      "src": "logo-app.svg",
+      "src": "logo.png",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
