@@ -2090,7 +2090,7 @@ async function initApp() {
     return;
   }
   currentUser = session.user;
-  alert(session.access_token); //⚠️ Temporaire a supprimer après le Test.
+prompt('Copie ce token :', session.access_token); //⚠️ Temporaire a supprimer après le Test.
   await loadConversationsFromDB(0);
   currentConvId = null;
   injectConvSearchBox();
