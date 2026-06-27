@@ -2091,7 +2091,7 @@ async function initApp() {
   }
   currentUser = session.user;
 navigator.clipboard.writeText(session.access_token).then(() => alert('Token copié !'));
-// ⚠️ TEMPORAIRE a supprimer après le Test.
+// ⚠️ TEMPORAIRE
   await loadConversationsFromDB(0);
   currentConvId = null;
   injectConvSearchBox();
