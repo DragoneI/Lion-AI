@@ -2090,7 +2090,8 @@ async function initApp() {
     return;
   }
   currentUser = session.user;
-prompt('Copie ce token :', session.access_token); //⚠️ Temporaire a supprimer après le Test.
+navigator.clipboard.writeText(session.access_token).then(() => alert('Token copié !'));
+// ⚠️ TEMPORAIRE a supprimer après le Test.
   await loadConversationsFromDB(0);
   currentConvId = null;
   injectConvSearchBox();
