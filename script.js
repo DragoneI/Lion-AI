@@ -2,6 +2,7 @@
 const SUPABASE_URL = "https://jiycrapjqclvcsrvdldt.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppeWNyYXBqcWNsdmNzcnZkbGR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4NTE4NDUsImV4cCI6MjA5NDQyNzg0NX0.wIOoCURRDLmws-frss9g4pG4UBgH4jSLhNezJsc5JdM";
 const WORKER_URL = "https://lionchatbot.dragonetechnology.workers.dev/";
+const FASTAPI_URL = "https://pocketcodeur-lion-ai-backend.hf.space";
 
 // ═══════════════ SUPABASE ═══════════════
 var supabase;
@@ -656,7 +657,7 @@ function splitIntoChunks(text, maxLength, overlapRatio = 0.15) {
 async function generateEmbeddings(texts) {
   try {
     const headers = await workerHeaders();
-    const res = await fetch(WORKER_URL + 'embed', {
+    const res = await fetch(FASTAPI_URL + '/embed', {
       method: 'POST',
       headers,
       body: JSON.stringify({ texts })
@@ -673,61 +674,19 @@ async function generateEmbeddings(texts) {
 async function searchDocuments(query) {
   if (!currentUser) return null;
   try {
-    const queryEmbeddings = await generateEmbeddings([query]);
-    if (queryEmbeddings?.[0]) {
-      const { data: chunks, error } = await supabase.rpc('match_documents', {
-        query_embedding: queryEmbeddings[0],
-        match_threshold: 0.4,
-        match_count: 4
-      });
-      if (!error && chunks?.length > 0) {
-        return chunks.map(c => c.chunk_text);
-      }
-    }
+    const headers = await workerHeaders();
+    const res = await fetch(FASTAPI_URL + '/search', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ query })
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.chunks?.length ? data.chunks : null;
   } catch (e) {
-    console.warn('RAG vectoriel échoué:', e.message);
+    console.warn('RAG search échoué:', e.message);
+    return null;
   }
-
-  const { data: allChunks, error: fetchError } = await supabase
-    .from('document_chunks')
-    .select('chunk_text')
-    .eq('user_id', currentUser.id)
-    .limit(200);
-
-  if (fetchError || !allChunks?.length) return null;
-
-  const stopWords = new Set([
-    'le','la','les','de','du','des','un','une','et','en','au','aux',
-    'que','qui','est','il','je','tu','vous','nous','me','ce','se','sur',
-    'par','pour','dans','avec','sans','mais','the','is','of','in','it',
-    'be','to','peux','peut','dire','parle','fichier','document','contenu',
-    'explique','résume'
-  ]);
-
-  const keywords = query.toLowerCase()
-    .replace(/[^\w\s]/g, ' ')
-    .split(/\s+/)
-    .filter(w => w.length > 2 && !stopWords.has(w));
-
-  if (keywords.length > 0) {
-    const scored = allChunks
-      .map(c => ({
-        text: c.chunk_text,
-        score: keywords.reduce((acc, kw) => acc + (c.chunk_text.toLowerCase().includes(kw) ? 1 : 0), 0)
-      }))
-      .filter(c => c.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 4)
-      .map(c => c.text);
-    if (scored.length > 0) return scored;
-  }
-
-  const docKeywords = ['fichier','document','readme','txt','pdf','csv','contenu','texte','uploadé'];
-  if (docKeywords.some(w => query.toLowerCase().includes(w))) {
-    return allChunks.slice(0, 4).map(c => c.chunk_text);
-  }
-
-  return null;
 }
 
 // ═══════════════ ANALYSE D'IMAGE ═══════════════
