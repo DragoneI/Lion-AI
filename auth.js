@@ -63,7 +63,7 @@ $('authForm').addEventListener('submit', async (e) => {
   if (isLoginMode) {
     const { data, error } = await _lionAuth.auth.signInWithPassword({ email, password });
     if (error) { showMessage('error', 'Erreur de connexion', error.message); return; }
-    window.location.href = 'index.html';
+    window.location.href = 'chat.html';
   } else {
     const { error } = await _lionAuth.auth.signUp({ email, password });
     if (error) { showMessage('error', "Erreur d'inscription", error.message); return; }
@@ -82,7 +82,7 @@ $('googleBtn').addEventListener('click', async () => {
   $('authMessageContainer').innerHTML = '';
   const { error } = await _lionAuth.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: window.location.origin + '/index.html' }
+    options: { redirectTo: window.location.origin + '/chat.html' }
   });
   if (error) showMessage('error', 'Erreur Google', error.message);
 });
