@@ -89,5 +89,5 @@ $('googleBtn').addEventListener('click', async () => {
 
 // ═══════════════ REDIRIGER SI DÉJÀ CONNECTÉ ═══════════════
 _lionAuth.auth.getSession().then(({ data: { session } }) => {
-  if (session?.user) window.location.href = 'index.html';
+  if (session?.user) window.location.href = 'chat.html';
 });
